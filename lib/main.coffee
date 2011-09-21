@@ -1,3 +1,6 @@
-require('node-log').setName 'APPNAME'
+require('node-log').setName 'node-package'
 
-module.exports = {}
+module.exports = 
+  windows = require './windows/main'
+  unix = require './unix/main'
+  osx = require './osx/main'

@@ -2,8 +2,11 @@
 
 ### Minor
 
-  * Nothing here yet
+  * Figure out what the hell OSX uses for packaging
+  * Look into cross-platform resource obfuscation
 
 ### Major
 
-  * Nothing here yet
+  * Windows - .NET assembly generation using Mono.cecil, MSI generation for generated assembly (optional)
+  * OSX - ???
+  * Ubuntu - .deb generation

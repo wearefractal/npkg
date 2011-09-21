@@ -1,9 +1,9 @@
 {
-   "name":"APPNAME",
-   "description":"Nothing here yet",
+   "name":"node-package",
+   "description":"Creates cross-platform installers for NodeJS applications",
    "version":"0.0.1",
-   "homepage":"http://github.com/wearefractal/APPNAME",
-   "repository":"git://github.com/wearefractal/APPNAME.git",
+   "homepage":"http://github.com/wearefractal/node-package",
+   "repository":"git://github.com/wearefractal/node-package.git",
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
    "main":"./lib/main.coffee",
    
@@ -18,7 +18,7 @@
    "licenses":[
       {
          "type":"MIT",
-         "url":"http://github.com/wearefractal/APPNAME/raw/master/LICENSE"
+         "url":"http://github.com/wearefractal/node-package/raw/master/LICENSE"
       }
    ]
 }

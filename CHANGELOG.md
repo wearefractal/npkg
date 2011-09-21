@@ -1,4 +1,4 @@
-0.0.1 / Month Day, 2011
+0.0.1 / September 21, 2011
 ==================
 
   * Start of the project

@@ -1,11 +1,11 @@
-**Nothing here yet**
+**node-package is a utility that generates cross-platform installation packages for NodeJS applications**
 
 
 ## Installation
     
-To install APPNAME, use [npm](http://github.com/isaacs/npm):
+To install node-package, use [npm](http://github.com/isaacs/npm):
 
-        $ npm install -g APPNAME
+        $ npm install -g node-package
 
 ## Usage
 
@@ -13,7 +13,7 @@ Nothing here yet
 
 ## Examples
 
-You can view further examples in the [example folder.](https://github.com/wearefractal/APPNAME/tree/master/examples)
+You can view further examples in the [example folder.](https://github.com/wearefractal/node-package/tree/master/examples)
 
 ## LICENSE
 
