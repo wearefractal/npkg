@@ -7,14 +7,16 @@
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
    "main":"./lib/main.coffee",
    
+   "preferGlobal":true,
    "bin":{
-      "npkg":"bin/cli.coffee"
+      "npkg":"./bin/npkg"
    },
    "dependencies":{
       "coffee-script":"*",
       "node-log":"*",
       "protege":"*",
-      "nopt":"*"
+      "nopt":"*",
+      "semver":"*"
    },
    "engines":{
       "node":">= 0.4.0"
