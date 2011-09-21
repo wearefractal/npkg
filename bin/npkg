@@ -20,11 +20,16 @@ short =
 parsed = nopt known, short, process.argv, 2
 log.info 'Starting npkg. Architecture: ' + parsed.arch
   
-try
-  npkg = require '../lib/main'
-  npkg.build npkg[parsed.arch], parsed
-catch err
-  log.error 'Build failed! - Error: ' + err
-  throw err if err
-finally
-  log.info 'Build completed! - Files located at ' + parsed.out
+npkg = require '../lib/main'
+basedir = './temp/'
+
+npkg.build basedir, npkg[parsed.arch], parsed, (err) ->
+  if err
+    log.error 'Build failed! - Error: ' + err
+    # rimraf.sync basedir
+    if !(err instanceof Error)
+      err = new Error err
+    throw err if err
+  else
+    log.info 'Build completed! - Files located at ' + parsed.out
+    # rimraf.sync basedir

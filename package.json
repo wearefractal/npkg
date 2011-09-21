@@ -16,7 +16,10 @@
       "node-log":"*",
       "protege":"*",
       "nopt":"*",
-      "semver":"*"
+      "get":"*",
+      "node-dep":"*",
+      "semver":"*",
+      "rimraf":"*"
    },
    "engines":{
       "node":">= 0.4.0"
