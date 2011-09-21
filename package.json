@@ -1,16 +1,20 @@
 {
-   "name":"node-package",
+   "name":"npkg",
    "description":"Creates cross-platform installers for NodeJS applications",
    "version":"0.0.1",
-   "homepage":"http://github.com/wearefractal/node-package",
-   "repository":"git://github.com/wearefractal/node-package.git",
+   "homepage":"http://github.com/wearefractal/npkg",
+   "repository":"git://github.com/wearefractal/npkg.git",
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
    "main":"./lib/main.coffee",
    
+   "bin":{
+      "npkg":"bin/cli.coffee"
+   },
    "dependencies":{
       "coffee-script":"*",
       "node-log":"*",
-      "protege":"*"
+      "protege":"*",
+      "nopt":"*"
    },
    "engines":{
       "node":">= 0.4.0"
@@ -18,7 +22,7 @@
    "licenses":[
       {
          "type":"MIT",
-         "url":"http://github.com/wearefractal/node-package/raw/master/LICENSE"
+         "url":"http://github.com/wearefractal/npkg/raw/master/LICENSE"
       }
    ]
 }

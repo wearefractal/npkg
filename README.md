@@ -1,11 +1,11 @@
-**node-package is a utility that generates cross-platform installation packages for NodeJS applications**
+**npkg is a utility that generates cross-platform installation packages for NodeJS applications**
 
 
 ## Installation
     
 To install node-package, use [npm](http://github.com/isaacs/npm):
 
-        $ npm install -g node-package
+        $ npm install -g npkg
 
 ## Usage
 
@@ -13,7 +13,7 @@ Nothing here yet
 
 ## Examples
 
-You can view further examples in the [example folder.](https://github.com/wearefractal/node-package/tree/master/examples)
+You can view further examples in the [example folder.](https://github.com/wearefractal/npkg/tree/master/examples)
 
 ## LICENSE
 
