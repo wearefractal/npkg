@@ -5,7 +5,7 @@
     
 To install node-package, use [npm](http://github.com/isaacs/npm):
 
-        $ npm install -g npkg
+    $ npm install -g npkg
 
 ## Dependencies
 
@@ -13,9 +13,18 @@ Java. If we want to shake Java we have to write custom installers for every type
 
 ## Usage
 
-        $ npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
+    $ npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
 
-Simple as that.
+Simple as that. If you did everything properly you will now be greeted with an epic success
+
+    [npkg - info] Starting npkg.
+    [npkg - info] Starting TestApp build
+    [npkg - info] Packing and grabbing dependencies...
+    [npkg - info] Downloading latest NodeJS stable/unstable releases...
+    [npkg - info] Unpacking/packing/compressing/discombobulating...
+    [npkg - info] Generating installer...
+    [npkg - info] Converting to normal formats...
+    [npkg - info] Finished!
 
 ## Examples
 

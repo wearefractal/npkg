@@ -20,10 +20,10 @@ module.exports =
       dirs = {}
       dirs.temp = temp
       dirs.base = base
-      dirs.app = path.join base, 'app/'
-      dirs.deps = path.join base, 'dependencies/'
+      dirs.app = base
       dirs.node = path.join base, 'node/'
-      dirs.config = path.join base, 'configuration/'
+      dirs.deps = path.join dirs.node, 'node_modules/'
+      dirs.config = path.join base, 'config/'
       
       log.debug 'Temporary folder: ' + base
       for dir of dirs
