@@ -7,6 +7,6 @@
 
 ### Major
 
-  * Windows - .NET assembly generation using Mono.cecil, MSI generation for generated assembly (optional)
+  * Windows - .NET assembly generation using Mono.cecil, MSI installer generation for generated assembly (optional)
   * OSX - ???
-  * Ubuntu - .deb generation
+  * Unix - .deb generation, .rpm generation

@@ -5,22 +5,18 @@ rimraf = require 'rimraf'
 fs = require 'fs'
 path = require 'path'
 packer = require './packer'
+izpack = require './izpack'
 
 module.exports = 
-  # windows: require './windows/main'
-  debian: require './debian/main'
-  # osx: require './osx/main'
-  
-  build: (temp, gen, opt, cb) ->
-      return cb 'Invalid generator' unless gen
+  build: (temp, opt, cb) ->
       return cb 'Missing parameters' unless opt
       pack = JSON.parse fs.readFileSync path.join(opt.in, 'package.json')
       return cb 'Failed to find package.json in ' + opt.in unless pack
       return cb '"name" property not in package.json' unless pack.name
       
-      log.info 'Starting ' + opt.arch + ' build'
+      log.info 'Starting ' + pack.name + ' build'
         
-      base = path.join temp, 'npkg-' + opt.arch + pack.name + new Date().getTime(), '/'
+      base = path.join temp, 'npkg-' + pack.name + new Date().getTime(), '/'
       dirs = {}
       dirs.temp = temp
       dirs.base = base
@@ -37,7 +33,6 @@ module.exports =
 
       log.info 'Packing and grabbing dependencies...'
       packer.save dirs, pack, opt, (err) ->
-        if err
-          return cb err
-        gen.builder.build dirs, pack, opt, cb # Todo: This is where writing of output files should be
+         return cb err if err
+         log.debug izpack.generateXML dirs, pack, opt, cb # Todo: Gen XML installer from package.json, run it through izpack compile, run it though converter utils
       

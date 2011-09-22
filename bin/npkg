@@ -9,8 +9,6 @@ path = require 'path'
 known =
   in: path
   out: path
-  # arch: ['windows', 'debian', 'osx']
-  arch: ['debian']
 
 short =
   i: ['--in']
@@ -18,12 +16,14 @@ short =
   t: ['--arch']       
            
 parsed = nopt known, short, process.argv, 2
-log.info 'Starting npkg. Architecture: ' + parsed.arch
+return log.error 'Please enter all required parameters' unless parsed.in and parsed.out
+  
+log.info 'Starting npkg.'
   
 npkg = require '../lib/main'
 basedir = './temp/'
 
-npkg.build basedir, npkg[parsed.arch], parsed, (err) ->
+npkg.build basedir, parsed, (err) ->
   if err
     log.error 'Build failed! - Error: ' + err
     # rimraf.sync basedir

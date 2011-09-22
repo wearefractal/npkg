@@ -19,7 +19,8 @@
       "get":"*",
       "node-dep":"*",
       "semver":"*",
-      "rimraf":"*"
+      "rimraf":"*",
+      "jsontoxml":"*"
    },
    "engines":{
       "node":">= 0.4.0"
