@@ -2,11 +2,12 @@
 
 ### Minor
 
-  * Figure out what the hell OSX uses for packaging
-  * Look into cross-platform resource obfuscation
+  * Semver for dependency and NodeJS versioning
+  * Cross-comparison between engine and dependency versioning
 
 ### Major
 
-  * Windows - .NET assembly generation using Mono.cecil, MSI installer generation for generated assembly (optional)
-  * OSX - ???
-  * Unix - .deb generation, .rpm generation
+  * Installer customization through config file
+  * Windows - .exe - 100%
+  * OSX - .app - 100%
+  * Unix - .jar - 100% (Possibly look into .rpm and .deb generation)
