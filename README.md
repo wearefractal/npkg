@@ -13,7 +13,7 @@ Java. If we want to shake Java we have to write custom installers for every type
 
 ## Usage
 
-        npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
+        $ npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
 
 Simple as that.
 
