@@ -7,9 +7,15 @@ To install node-package, use [npm](http://github.com/isaacs/npm):
 
         $ npm install -g npkg
 
+## Dependencies
+
+Java. Yes, it sucks. To keep it simple we had to do it. If we want to shake Java we have to write custom installers for every type of OS. This also means the end user needs Java to run the installers. Feel free to submit a pull request if you come up with a better idea
+
 ## Usage
 
-Nothing here yet
+```npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>```
+
+Simple as that.
 
 ## Examples
 
