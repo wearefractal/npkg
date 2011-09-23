@@ -1,6 +1,5 @@
 **npkg is a utility that generates cross-platform installation packages for NodeJS applications**
 
-
 ## Installation
     
 To install node-package, use [npm](http://github.com/isaacs/npm):
@@ -13,12 +12,12 @@ To install node-package, use [npm](http://github.com/isaacs/npm):
 
 Simple as that. If you did everything properly you will now be greeted with an epic success
 
-    $ OUTPUT GOES HERE, NOT DONE YET
+![Output](http://i.imgur.com/Y1wBs.png)
 
 ## Dependencies
 
 For developers:
-An GNU tar (Unix and OSX should already have this), Java, and Python.
+tar, Java, and Python.
 
 For consumers:
 Java. If we want to shake Java we have to write native installers for every type of OS. Send me a message if you come up with a better idea, Java FTL.
