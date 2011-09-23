@@ -11,8 +11,12 @@ izpack = require './izpack'
 module.exports = 
   build: (temp, opt, cb) ->
     throw 'Missing parameters' unless opt
-    pack = JSON.parse fs.readFileSync path.join(opt.in, 'package.json')
-    throw 'Failed to find package.json in ' + opt.in unless pack
+      
+    try
+      pack = JSON.parse fs.readFileSync path.join(opt.in, 'package.json')
+    catch err
+      throw 'Failed to find package.json in ' + opt.in
+        
     throw '"name" property not in package.json' unless pack.name
     
     log.info 'Starting ' + pack.name + ' build'
