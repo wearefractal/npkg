@@ -7,28 +7,21 @@ To install node-package, use [npm](http://github.com/isaacs/npm):
 
     $ npm install -g npkg
 
-## Dependencies
-
-Java. If we want to shake Java we have to write custom installers for every type of OS. This also means the end user needs Java to run the installers. Feel free to submit a pull request if you come up with a better idea, Java FTL.
-
 ## Usage
 
     $ npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
 
 Simple as that. If you did everything properly you will now be greeted with an epic success
 
-    [npkg - info] Starting npkg.
-    [npkg - info] Starting TestApp build
-    [npkg - info] Packing and grabbing dependencies...
-    [npkg - info] Downloading latest NodeJS stable/unstable releases...
-    [npkg - info] Unpacking/packing/compressing/discombobulating...
-    [npkg - info] Generating installer...
-    [npkg - info] Converting to normal formats...
-    [npkg - info] Finished!
+    $ OUTPUT GOES HERE, NOT DONE YET
 
-## Examples
+## Dependencies
 
-You can view further examples in the [example folder.](https://github.com/wearefractal/npkg/tree/master/examples)
+For developers:
+An GNU tar (Unix and OSX should already have this), Java, and Python.
+
+For consumers:
+Java. If we want to shake Java we have to write native installers for every type of OS. Send me a message if you come up with a better idea, Java FTL.
 
 ## LICENSE
 

@@ -22,7 +22,8 @@ module.exports =
       dirs.base = base
       dirs.app = base
       dirs.node = path.join base, 'node/'
-      dirs.deps = path.join dirs.node, 'node_modules/'
+      dirs.deps = path.join base, 'deps/'
+      dirs.npm = path.join dirs.node, 'node_modules/'
       dirs.config = path.join base, 'config/'
       
       log.debug 'Temporary folder: ' + base
@@ -30,9 +31,9 @@ module.exports =
         if path.existsSync(dirs[dir])
           rimraf.sync dirs[dir]
         fs.mkdirSync dirs[dir], 0777
-
-      log.info 'Packing and grabbing dependencies...'
+          
       packer.save dirs, pack, opt, (err) ->
-         return cb err if err
-         log.debug izpack.generateXML dirs, pack, opt, cb # Todo: Gen XML installer from package.json, run it through izpack compile, run it though converter utils
+         throw err if err
+         info = izpack.generateXML dirs, pack, opt # Todo: Run it through izpack compile, run it though converter utils
+         cb null
       

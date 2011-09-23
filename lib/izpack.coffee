@@ -1,7 +1,7 @@
 jsxml = require 'jsontoxml'
 
 module.exports =
-  generateXML: (dirs, pack, opt, cb) ->
+  generateXML: (dirs, pack, opt) ->
     app = {}
     
     # Install info - Displayed during install + used in saving files
