@@ -6,7 +6,11 @@ fs = require 'fs'
 util = require './util'
 async = require 'async'
 rimraf = require 'rimraf'
-    
+
+copyApp = (dirs, pack, opt, cb) ->
+  log.info 'Cloning application...'
+  util.cloneDirectory opt.in, dirs.app, true, ['npkg-temp'], cb
+      
 saveNPM = (dirs, pack, opt, cb) ->
   log.info 'Analyzing dependencies...'
   npm.resolve opt.in, (deps) ->
@@ -22,10 +26,10 @@ saveNPM = (dirs, pack, opt, cb) ->
           fs.mkdir outf, 0777, (err) ->
             throw err if err
             util.unpack result, outf, true, (err) ->
-              throw err if err
+              if err then log.error 'Unpacking ' + dep + ' failed! Error: ' + err
               call()
         
-    async.forEach Object.keys(deps), saveModule, -> rimraf(dirs.deps, cb)
+    async.forEach Object.keys(deps), saveModule, -> rimraf dirs.deps, cb
     return
 
 saveNode = (dirs, pack, opt, cb) ->
@@ -60,4 +64,5 @@ module.exports =
     ## TODO: Writing installation scripts to config folder and app data to app
     npmfn = (call) -> saveNPM dirs, pack, opt, call
     nodefn = (call) -> saveNode dirs, pack, opt, call
-    async.parallel [npmfn, nodefn], cb
+    copyfn = (call) -> copyApp dirs, pack, opt, call
+    async.parallel [copyfn, npmfn, nodefn], cb

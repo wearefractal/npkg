@@ -15,7 +15,8 @@ short =
   o: ['--out']       
            
 parsed = nopt known, short, process.argv, 2
-return log.error 'Please enter all required parameters' unless parsed.in and parsed.out
+return log.error 'Please enter all required parameters' unless parsed.in
+parsed.out ?= path.join parsed.in, '/build/'
   
 logo =  ''
 logo += '               _           \r\n'
@@ -25,10 +26,10 @@ logo += '|  _ \\ |  _ \\ | |_/ )/ _  |\r\n'
 logo += '| | | || |_| ||  _ (( (_| |\r\n'
 logo += '|_| |_||  __/ |_| \\_)\\___ |\r\n'
 logo += '       |_|          (_____|\r\n'
-console.log logo
+console.log logo.red
   
 npkg = require '../lib/main'
-basedir = './temp/'
+basedir = path.join parsed.in, '/npkg-temp/'
 try
   npkg.build basedir, parsed, ->
     log.info 'Build completed! - Files located at ' + parsed.out

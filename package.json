@@ -14,6 +14,7 @@
    "dependencies":{
       "coffee-script":"*",
       "node-log":"*",
+      "colors":"*",
       "protege":"*",
       "nopt":"*",
       "get":"*",
@@ -21,7 +22,8 @@
       "semver":"*",
       "rimraf":"*",
       "jsontoxml":"*",
-      "async":"*"
+      "async":"*",
+      "wrench":"*"
    },
    "engines":{
       "node":">= 0.4.0"

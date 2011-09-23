@@ -1,0 +1,26 @@
+{
+   "name":"TestApp",
+   "description":"TestApp for npkg",
+   "version":"0.0.1",
+   "homepage":"http://github.com/wearefractal/npkg",
+   "repository":"git://github.com/wearefractal/npkg.git",
+   "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
+   "main":"./lib/main.js",
+
+   "dependencies":{
+      "coffee-script":"*",
+      "node-log":"*",
+      "fusker":"*",
+      "protege":"*",
+      "get":"*"
+   },
+   "engines":{
+      "node":">= 0.4.0"
+   },
+   "licenses":[
+      {
+         "type":"MIT",
+         "url":"http://github.com/wearefractal/npkg/raw/master/LICENSE"
+      }
+   ]
+}

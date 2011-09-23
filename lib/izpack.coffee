@@ -11,7 +11,7 @@ module.exports =
       url: pack.homepage
       author: pack.author
       requiresjdk: 'no'
-      createdBy: 'npkg' # Shameless watermarking, this isnt displayed anywhere
+      generator: 'npkg' # Shameless watermarking, this isnt displayed anywhere
     
     # Installer variables - TODO: Let devs have a config to change these via CLI 
     # Example - These can be used to automatically tick desktop shortcuts etc.

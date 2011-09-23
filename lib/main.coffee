@@ -1,3 +1,4 @@
+require 'protege'
 log = require 'node-log'
 log.setName 'npkg'
 
@@ -17,6 +18,7 @@ module.exports =
     log.info 'Starting ' + pack.name + ' build'
     dirs = {}
     dirs.temp = temp
+    dirs.app = path.join temp, 'app/'
     dirs.node = path.join temp, 'node/'
     dirs.deps = path.join temp, 'deps/'
     dirs.npm = path.join dirs.node, 'node_modules/'
@@ -26,8 +28,7 @@ module.exports =
       if path.existsSync(dirs[dir])
         rimraf.sync dirs[dir]
       fs.mkdirSync dirs[dir], 0777
-        
+
     packer.save dirs, pack, opt, ->
        info = izpack.generateXML dirs, pack, opt # Todo: Run it through izpack compile, run it though converter utils
        cb()
-      
