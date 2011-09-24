@@ -12,9 +12,8 @@ module.exports =
   # Turns our install.xml into install.jar
   compile: (dirs, pack, opt, cb) ->
     log.info 'Compiling installer...'
-    cmd = __dirname + '/izpack/bin/compile "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp 
-    cmd += '" -o "' + path.join(opt.out, 'install.jar') + '" -k standard'
-    log.debug cmd
+    cmd = __dirname + '/izpack/bin/compile "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp + '" '
+    cmd += '-o "' + path.join(opt.out, 'install.jar') + '" -k standard'
     exec cmd, (error, stdout, stderr) ->
       throw error if error
       cb()

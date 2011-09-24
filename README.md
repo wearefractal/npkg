@@ -11,7 +11,7 @@ To install node-package, use [npm](http://github.com/isaacs/npm):
     $ npkg -i <folder containing your package.json and app> -o <folder you want installers saved to>
 
 Simple as that. If you did everything properly you will now be greeted with an epic success
-![Output](http://i.imgur.com/Y1wBs.png)
+![Output](http://i.imgur.com/XfK3A.png)
 
 -o is optional and defaults to <input directory>/build/
 
