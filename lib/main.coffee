@@ -34,5 +34,7 @@ module.exports =
       fs.mkdirSync dirs[dir], 0777
 
     packer.save dirs, pack, opt, ->
-       info = izpack.generateXML dirs, pack, opt # Todo: Run it through izpack compile, run it though converter utils
-       cb()
+      izpack.generateXML dirs, pack, opt, (result) ->
+        fs.writeFile path.join(dirs.config, 'install.xml'), result, (err) ->
+          throw err if err
+          cb()

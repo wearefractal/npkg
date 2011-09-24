@@ -1,7 +1,8 @@
 jsxml = require 'jsontoxml'
+path = require 'path'
 
 module.exports =
-  generateXML: (dirs, pack, opt) ->
+  generateXML: (dirs, pack, opt, cb) ->
     app = {}
     
     # Install info - Displayed during install + used in saving files
@@ -22,9 +23,18 @@ module.exports =
     app.resources.push res: {attrs: {id: 'InfoPanel.info', src=''}}
     ### 
     
-    app.panels = []
-    app.panels.push {name: 'panel', attrs: 'classname="HelloPanel"'}  
-    app.panels.push {name: 'panel', attrs: 'classname="TargetPanel"'}  
-    app.panels.push {name: 'panel', attrs: 'classname="InstallPanel"'}  
-    app.panels.push {name: 'panel', attrs: 'classname="SimpleFinishPanel"'}  
-    return '<installation version="1.0">' + jsxml.obj_to_xml(app) + '</installation>'
+    path.exists path.join(dirs.app, 'LICENSE'), (exists) ->
+      app.panels = []
+      app.resources = []
+      app.packs = {}
+      app.panels.push name: 'panel', attrs: 'classname="HelloPanel"'
+      if exists
+        app.panels.push name: 'panel', attrs: 'classname="LicencePanel"'
+        app.resources.push name: 'res', attrs: 'id="LicencePanel.licence" src="' + path.join(path.basename(dirs.app), 'LICENSE') + '"'
+      app.panels.push name: 'panel', attrs: 'classname="TargetPanel"' 
+      app.panels.push name: 'panel', attrs: 'classname="InstallPanel"' 
+      app.panels.push name: 'panel', attrs: 'classname="SimpleFinishPanel"'
+      # TODO: <executable> that sets up os-dependent shit and compiles node if it needs to
+      app.packs.pack = name: pack.name, required: 'yes', preselected: 'yes', id: pack.name, file: src: dirs.temp, targetdir: '$INSTALL_PATH', override: 'asktrue'
+      console.log app.packs.pack
+      cb '<installation version="1.0">' + jsxml.obj_to_xml(app) + '</installation>'
