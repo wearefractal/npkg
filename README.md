@@ -17,7 +17,7 @@ Simple as that. If you did everything properly you will now be greeted with an e
 
 ## Configuration
 
-npkg parses all of it's configuration out of your package.json file for the installer
+npkg parses configuration out of your package.json file for the installer
 ![It looks like this](http://i.imgur.com/WepNn.png)
 
 If you have a LICENSE file in the same folder, you will also force an agreement
