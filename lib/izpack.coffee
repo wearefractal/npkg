@@ -1,27 +1,39 @@
 jsxml = require 'jsontoxml'
 path = require 'path'
+exec = require('child_process').exec
+log = require 'node-log'
 
+# Super lame way of removing bullshit from package. Fuckers dont know how to leave out < and >
+filter = (str) ->
+  str = str.replaceAll '<', '&lt;'
+  str = str.replaceAll '>', '&gt;'
+  
 module.exports =
+  # Turns our install.xml into install.jar
+  compile: (dirs, pack, opt, cb) ->
+    log.info 'Compiling installer...'
+    cmd = __dirname + '/izpack/bin/compile "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp 
+    cmd += '" -o "' + path.join(opt.out, 'install.jar') + '" -k standard'
+    log.debug cmd
+    exec cmd, (error, stdout, stderr) ->
+      throw error if error
+      cb()
+        
+  # This is a trainwreck of converting a JSON object to XML
   generateXML: (dirs, pack, opt, cb) ->
+    log.info 'Generating installer configuration...'
     app = {}
     
     # Install info - Displayed during install + used in saving files
     app.info =
-      appname: pack.name
-      appversion: pack.version
-      url: pack.homepage
-      author: pack.author
+      appname: filter pack.name
+      appversion: filter pack.version
+      url: filter pack.homepage
+      author: filter pack.author
       requiresjdk: 'no'
       generator: 'npkg' # Shameless watermarking, this isnt displayed anywhere
     
-    # Installer variables - TODO: Let devs have a config to change these via CLI 
-    # Example - These can be used to automatically tick desktop shortcuts etc.
-    app.variables = {}
-    
-    ### TODO: License file autofind, info from package.json, etc.
-    app.resources = []
-    app.resources.push res: {attrs: {id: 'InfoPanel.info', src=''}}
-    ### 
+    app.locale = [name: 'langpack', attrs: 'iso3="eng"']
     
     path.exists path.join(dirs.app, 'LICENSE'), (exists) ->
       app.panels = []
@@ -37,8 +49,10 @@ module.exports =
       # TODO: <executable> that sets up os-dependent shit and compiles node if it needs to
       mainpack = 
         name: 'pack'
-        attrs: 'name="' + pack.name+  '" required="yes" preselected="yes" id="' + pack.name + '"'
-      mainpack.children = [description: pack.description, name: 'file', attrs: 'src="' + dirs.temp + '" targetdir="$INSTALL_PATH" override="asktrue"']
+        attrs: 'name="' + pack.name +  '" required="yes" preselected="yes" id="' + pack.name + '"'
+        
+      mainpack.children = [{name: 'description', text: filter(pack.description)}, 
+          {name: 'file', attrs: 'src="' + dirs.temp + '" targetdir="$INSTALL_PATH" override="asktrue"'}]
       app.packs.push mainpack
 
-      cb '<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?><installation version="1.0">' + jsxml.obj_to_xml(app) + '</installation>'
+      cb '<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?><installation version="1.0">' + jsxml.obj_to_xml(app) + '<guiprefs resizable="yes" width="800" height="600"/></installation>'

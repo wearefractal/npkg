@@ -35,6 +35,7 @@ module.exports =
     copyAll = (call) ->
       fs.readdir dir, (err, files) ->
         excludes = excludes.unique()
+        files ?= []
         files = (x for x in files when excludes.indexOf(x) is -1) # TODO: REGEX TESTING
         async.forEach files, clone, call
               

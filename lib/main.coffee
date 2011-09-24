@@ -18,7 +18,7 @@ module.exports =
       throw 'Failed to find package.json in ' + opt.in
         
     throw '"name" property not in package.json' unless pack.name
-    
+
     log.info 'Starting ' + pack.name + ' build'
     dirs = {}
     dirs.temp = temp
@@ -32,9 +32,11 @@ module.exports =
       if path.existsSync(dirs[dir])
         rimraf.sync dirs[dir]
       fs.mkdirSync dirs[dir], 0777
-
+        
+    fs.mkdirSync(opt.out, 0777) unless path.existsSync(opt.out)
+      
     packer.save dirs, pack, opt, ->
       izpack.generateXML dirs, pack, opt, (result) ->
         fs.writeFile path.join(dirs.config, 'install.xml'), result, (err) ->
           throw err if err
-          cb()
+          izpack.compile dirs, pack, opt, cb

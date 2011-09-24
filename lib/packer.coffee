@@ -9,7 +9,7 @@ rimraf = require 'rimraf'
 
 copyApp = (dirs, pack, opt, cb) ->
   log.info 'Cloning application...'
-  util.cloneDirectory opt.in, dirs.app, true, ['npkg-temp'], cb
+  util.cloneDirectory opt.in, dirs.app, true, ['npkg-temp', opt.out], cb
       
 saveNPM = (dirs, pack, opt, cb) ->
   log.info 'Analyzing dependencies...'
@@ -49,7 +49,7 @@ saveNode = (dirs, pack, opt, cb) ->
           throw err if err
           fs.unlink result, (err) ->
             throw err if err
-            call()
+            rimraf path.join(srcout, '/doc'), call # delete nodejs src docs, its like 9mb of crap we dont need
             
   dlexe = (call) ->    
     log.info 'Downloading node.exe...' 
