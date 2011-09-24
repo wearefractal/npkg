@@ -9,7 +9,7 @@ args = process.argv[2..4]
 parsed = {}
 parsed.in = path.resolve(args[0])
 parsed.out = path.resolve(args[1] || path.join parsed.in, '/build/')
-log.debug parsed  
+ 
 return log.error 'Please enter all required parameters' unless parsed.in
   
 logo =  ''
