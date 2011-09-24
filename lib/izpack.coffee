@@ -26,7 +26,7 @@ module.exports =
     path.exists path.join(dirs.app, 'LICENSE'), (exists) ->
       app.panels = []
       app.resources = []
-      app.packs = {}
+      app.packs = []
       app.panels.push name: 'panel', attrs: 'classname="HelloPanel"'
       if exists
         app.panels.push name: 'panel', attrs: 'classname="LicencePanel"'
@@ -35,6 +35,10 @@ module.exports =
       app.panels.push name: 'panel', attrs: 'classname="InstallPanel"' 
       app.panels.push name: 'panel', attrs: 'classname="SimpleFinishPanel"'
       # TODO: <executable> that sets up os-dependent shit and compiles node if it needs to
-      app.packs.pack = name: pack.name, required: 'yes', preselected: 'yes', id: pack.name, file: src: dirs.temp, targetdir: '$INSTALL_PATH', override: 'asktrue'
-      console.log app.packs.pack
-      cb '<installation version="1.0">' + jsxml.obj_to_xml(app) + '</installation>'
+      mainpack = 
+        name: 'pack'
+        attrs: 'name="' + pack.name+  '" required="yes" preselected="yes" id="' + pack.name + '"'
+      mainpack.children = [description: pack.description, name: 'file', attrs: 'src="' + dirs.temp + '" targetdir="$INSTALL_PATH" override="asktrue"']
+      app.packs.push mainpack
+
+      cb '<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?><installation version="1.0">' + jsxml.obj_to_xml(app) + '</installation>'
