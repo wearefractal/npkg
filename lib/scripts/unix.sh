@@ -1,4 +1,7 @@
-#!/bin/sh
-
-echo 'Installing local NodeJS - Unix'
-echo 'Base = $BASE'
+echo 'Installing NodeJS - Unix'
+cd $BASE/node
+curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1
+./configure --prefix=$BASE/node
+make
+wait
+echo 'Installation finished!'

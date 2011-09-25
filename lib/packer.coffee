@@ -61,7 +61,7 @@ saveNode = (dirs, pack, opt, cb) ->
       throw err if err
       call()
         
-  async.parallel [dlsrc, dlexe], cb 
+  async.parallel [dlexe], cb 
     
 module.exports =
   save: (dirs, pack, opt, cb) ->
