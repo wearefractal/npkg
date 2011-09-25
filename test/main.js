@@ -1,3 +1,4 @@
+require('coffee-script');
 var log = require('node-log')
 log.setName('TestApp')
 

@@ -1,2 +1,3 @@
-echo 'Configuring NodeJS - Windows'
-echo 'Installation finished!'
+echo "Configuring NodeJS - Windows"
+
+echo "Installation finished!"

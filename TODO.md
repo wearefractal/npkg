@@ -9,6 +9,5 @@
 ### Major
 
   * Installer customization through config files
-  * Windows - .exe - 100%
-  * OSX - .app - 100%
-  * Unix - .jar - 100% (Possibly look into .rpm and .deb generation)
+  * Test on OSX and Windows
+  * Desktop Icons

@@ -7,6 +7,15 @@ util = require './util'
 async = require 'async'
 rimraf = require 'rimraf'
 
+writeRunners = (dirs, pack, opt, cb) ->
+  main =  path.join path.basename(dirs.app), pack.main
+  unix = '#!/bin/sh\n'
+  unix += 'cd $( dirname "$0" )\n'
+  unix += './node/node ./' + main+ '\n'
+  fs.writeFile path.join(dirs.temp, 'run'), unix, (err) ->
+    throw err if err
+    cb()
+  
 copyApp = (dirs, pack, opt, cb) ->
   log.info 'Cloning application...'
   util.cloneDirectory opt.in, dirs.app, true, ['npkg-temp', opt.out], cb
@@ -38,7 +47,7 @@ saveNPM = (dirs, pack, opt, cb) ->
 
 saveNode = (dirs, pack, opt, cb) ->
   # throw new Error 'Please specify a node engine version in package.json' unless pack.engines and pack.engines.node
-  # TODO: Validate NodeJS versions with package.json using semver, make sure windows has a node.exe, all that jazz 
+  # TODO: Validate NodeJS versions with package.json using semver
   srcdl = 'http://nodejs.org/dist/node-v0.4.12.tar.gz'
   exedl = 'http://nodejs.org/dist/v0.5.7/node.exe'
   
@@ -69,4 +78,6 @@ module.exports =
     nodefn = (call) -> saveNode dirs, pack, opt, call
     copyAppfn = (call) -> copyApp dirs, pack, opt, call
     copyScriptsfn = (call) -> copyScripts dirs, pack, opt, call
-    async.parallel [copyAppfn, copyScriptsfn, npmfn, nodefn], cb
+    unixRun = (call) -> writeRunners dirs, pack, opt, call
+    
+    async.parallel [copyAppfn, copyScriptsfn, unixRun, npmfn, nodefn], cb

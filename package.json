@@ -1,7 +1,7 @@
 {
    "name":"npkg",
    "description":"Creates cross-platform installers for NodeJS applications",
-   "version":"0.0.3",
+   "version":"0.0.4",
    "homepage":"http://github.com/wearefractal/npkg",
    "repository":"git://github.com/wearefractal/npkg.git",
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",

@@ -5,4 +5,6 @@ curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1
 make
 make install
 wait
+cd $BASE
+chmod 0777 run
 echo 'Installation finished!'

@@ -5,9 +5,10 @@
    "homepage":"http://github.com/wearefractal/npkg",
    "repository":"git://github.com/wearefractal/npkg.git",
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
-   "main":"./lib/main.js",
+   "main":"./main.js",
 
    "dependencies":{
+      "coffee-script":"*",
       "node-log":"*"
    },
    "engines":{

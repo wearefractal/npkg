@@ -16,7 +16,9 @@ module.exports =
       pack = JSON.parse fs.readFileSync path.join(opt.in, 'package.json')
     catch err
       throw 'Failed to find package.json in ' + opt.in
-        
+    
+    throw '"main" property not in package.json' unless pack.main
+    throw '"author" property not in package.json' unless pack.author
     throw '"name" property not in package.json' unless pack.name
 
     log.info 'Starting ' + pack.name + ' build'
