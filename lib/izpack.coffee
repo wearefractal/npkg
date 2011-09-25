@@ -50,15 +50,20 @@ module.exports =
     app = {}
     
     # Install info - Displayed during install + used in saving files
-    author = npm.parsePerson pack.author
+    authors = []
+    authors.push pack.author
+    if pack.contributors then authors.merge pack.contributors
+    if pack.maintainers then authors.merge pack.maintainers
+    authors = (npm.parsePerson(author) for author in authors)
+    
     app.info =
       appname: filter pack.name
       appversion: filter pack.version
       url: pack.homepage || author.url
-      authors: [{name: 'author', attrs: 'name="' + filter author.name + '" email="' + filter author.email + '"'}]
+      authors: ({name: 'author', attrs: 'name="' + author.name + '" email="' + author.email + '"'} for author in authors)
       requiresjdk: 'no'
       generator: 'npkg' # Shameless watermarking, this isnt displayed anywhere
-      pack200: {}
+      pack200: {} # Turns 40mb into 9mb. o lawd is dat sum insurgency
     
     app.locale = [name: 'langpack', attrs: 'iso3="eng"']
     

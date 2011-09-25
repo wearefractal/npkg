@@ -3,7 +3,7 @@
 <plist version="0.9">
 <dict>
   <key>CFBundleName</key>
-  <string>IzPack</string>
+  <string>npkg</string>
   <key>CFBundleVersion</key>
   <string>100.0</string>
   <key>CFBundleAllowMixedLocalizations</key>
@@ -19,7 +19,7 @@
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleIconFile</key>
-  <string>izpack.icns</string>
+  <string>npkg.icns</string>
   <key>Java</key>
   <dict>
     <key>MainClass</key>
