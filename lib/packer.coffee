@@ -13,7 +13,7 @@ writeRunners = (dirs, pack, opt, cb) ->
   unix += 'cd $( dirname "$0" )\n'
   unix += './node/node ./' + main+ '\n'
   
-  winblows = './node/node.exe ./' + main + '\r\n'
+  winblows = './node/node.exe ./' + main
   
   writeUnix = (call) ->
     fs.writeFile path.join(dirs.temp, 'run'), unix, (err) ->
