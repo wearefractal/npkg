@@ -68,15 +68,18 @@ def create_exe(settings):
     else:
         p7z = settings.p7z
     
+    inst7z = os.path.join(os.path.dirname(settings.file[0]), 'installer.7z')
+    instcfg = os.path.join(os.path.dirname(settings.file[0]), 'config.txt')
+    
     use_shell = sys.platform != "win32"
     
-    if (os.access('installer.7z', os.F_OK)):
-        os.remove('installer.7z')
+    if (os.access(inst7z, os.F_OK)):
+        os.remove(inst7z)
     files = '" "'.join(settings.file)
-    p7zcmd = '"%s" a -mmt -t7z -mx=9 installer.7z "%s"' % (p7z, files)
+    p7zcmd = '"%s" a -mmt -t7z -mx=9 %s "%s"' % (p7z, inst7z, files)
     subprocess.call(p7zcmd, shell=use_shell)
     
-    config = open('config.txt', 'w')
+    config = open(instcfg, 'w')
     config.write(';!@Install@!UTF-8!\r\n')
     config.write('Title="%s"\r\n' % settings.name)
     if settings.prompt:
@@ -92,7 +95,7 @@ def create_exe(settings):
     config.close()
     
     sfx = os.path.join(os.path.dirname(p7z), '7zS.sfx')
-    files = [sfx, 'config.txt', 'installer.7z']
+    files = [sfx, instcfg, inst7z]
     
     output = open(settings.output, 'wb')
     for f in files:
@@ -109,8 +112,8 @@ def create_exe(settings):
         upx = '"%s" --ultra-brute "%s"' % (upx, settings.output)
         subprocess.call(upx, shell=use_shell)
     
-    os.remove('config.txt')
-    os.remove('installer.7z')
+    os.remove(instcfg)
+    os.remove(inst7z)
 
 def main():
     create_exe(parse_options())

@@ -2,21 +2,47 @@ jsxml = require 'jsontoxml'
 path = require 'path'
 exec = require('child_process').exec
 log = require 'node-log'
+async = require 'async'
+npm = require './npm'
 
-# Super lame way of removing bullshit from package. Fuckers dont know how to leave out < and >
+# Super lame way of removing bullshit from package. Fuskers dont know how to leave out < and >
 filter = (str) ->
   str = str.replaceAll '<', '&lt;'
   str = str.replaceAll '>', '&gt;'
   
 module.exports =
   # Turns our install.xml into install.jar
-  compile: (dirs, pack, opt, cb) ->
-    log.info 'Compiling installer...'
-    cmd = __dirname + '/izpack/bin/compile "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp + '" '
-    cmd += '-o "' + path.join(opt.out, 'install.jar') + '" -k standard'
-    exec cmd, (error, stdout, stderr) ->
-      throw error if error
-      cb()
+  compile: (dirs, pack, opt, cb) ->    
+    outjar = path.join opt.out, pack.name + '.jar'  
+    outexe = path.join opt.out, pack.name + '.exe'
+    outapp = path.join opt.out, pack.name + '.app'
+    
+    izdir = path.join __dirname, 'izpack'
+    wrapdir = path.join izdir, '/utils/wrappers'
+    
+    jar = (call) ->
+      log.info 'Compiling .jar installer...'
+      cmd = path.join(izdir, '/bin/compile') + ' "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp + '" -o "' + outjar + '" -k standard'
+      exec cmd, (error, stdout, stderr) ->
+        throw error if error
+        call()
+          
+    exe = (call) ->
+      log.info 'Compiling .exe installer...'
+      cmd = path.join(wrapdir, '/izpack2exe/izpack2exe.py') + ' --file=' + outjar + ' --output=' + outexe 
+      cmd += ' --with-7z=' + path.join(wrapdir, '/izpack2exe/7za') + ' --with-upx=' + path.join(wrapdir, '/izpack2exe/upx') # Options. TODO: Let user change these
+      exec cmd, (error, stdout, stderr) ->
+        throw error if error
+        call()
+    
+    app = (call) ->
+      log.info 'Compiling .app installer...'
+      cmd = wrapdir + '/izpack2app/izpack2app.py ' + outjar + ' ' + outapp
+      exec cmd, (error, stdout, stderr) ->
+        throw error if error
+        call()
+                
+    jar -> async.parallel [exe, app], cb
         
   # This is a trainwreck of converting a JSON object to XML
   generateXML: (dirs, pack, opt, cb) ->
@@ -24,13 +50,15 @@ module.exports =
     app = {}
     
     # Install info - Displayed during install + used in saving files
+    author = npm.parsePerson pack.author
     app.info =
       appname: filter pack.name
       appversion: filter pack.version
-      url: filter pack.homepage
-      author: filter pack.author
+      url: pack.homepage || author.url
+      authors: [{name: 'author', attrs: 'name="' + filter author.name + '" email="' + filter author.email + '"'}]
       requiresjdk: 'no'
       generator: 'npkg' # Shameless watermarking, this isnt displayed anywhere
+      pack200: {}
     
     app.locale = [name: 'langpack', attrs: 'iso3="eng"']
     
@@ -51,7 +79,7 @@ module.exports =
         attrs: 'name="' + pack.name +  '" required="yes" preselected="yes" id="' + pack.name + '"'
         
       mainpack.children = [{name: 'description', text: filter(pack.description)}, 
-          {name: 'file', attrs: 'src="' + dirs.temp + '" targetdir="$INSTALL_PATH" override="asktrue"'}]
+          {name: 'file', attrs: 'src="' + dirs.temp + '" targetdir="$INSTALL_PATH" override="true"'}]
       app.packs.push mainpack
 
-      cb '<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?><installation version="1.0">' + jsxml.obj_to_xml(app) + '<guiprefs resizable="yes" width="800" height="600"/></installation>'
+      cb '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><installation version="1.0">' + jsxml.obj_to_xml(app) + '<guiprefs resizable="yes" width="800" height="600"/></installation>'

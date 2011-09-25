@@ -1,7 +1,12 @@
-0.0.2 / September 21, 2011
+0.0.3 / September 25, 2011
 ==================
 
-  * First working copy!
+  * .exe and .app compiling
+
+0.0.2 / September 24, 2011
+==================
+
+  * First working copy! .jar only
 
 0.0.1 / September 21, 2011
 ==================
