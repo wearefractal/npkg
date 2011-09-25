@@ -10,7 +10,11 @@ rimraf = require 'rimraf'
 copyApp = (dirs, pack, opt, cb) ->
   log.info 'Cloning application...'
   util.cloneDirectory opt.in, dirs.app, true, ['npkg-temp', opt.out], cb
-      
+
+copyScripts = (dirs, pack, opt, cb) ->
+  log.info 'Cloning scripts...'
+  util.cloneDirectory path.join(__dirname, '/scripts'), dirs.config, false, [], cb
+            
 saveNPM = (dirs, pack, opt, cb) ->
   log.info 'Analyzing dependencies...'
   npm.resolve opt.in, (deps) ->
@@ -61,8 +65,8 @@ saveNode = (dirs, pack, opt, cb) ->
     
 module.exports =
   save: (dirs, pack, opt, cb) ->
-    ## TODO: Writing installation scripts to config folder and app data to app
     npmfn = (call) -> saveNPM dirs, pack, opt, call
     nodefn = (call) -> saveNode dirs, pack, opt, call
-    copyfn = (call) -> copyApp dirs, pack, opt, call
-    async.parallel [copyfn, npmfn, nodefn], cb
+    copyAppfn = (call) -> copyApp dirs, pack, opt, call
+    copyScriptsfn = (call) -> copyScripts dirs, pack, opt, call
+    async.parallel [copyAppfn, copyScriptsfn, npmfn, nodefn], cb

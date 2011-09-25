@@ -19,7 +19,6 @@
       "get":"*",
       "node-dep":"*",
       "rimraf":"*",
-      "jsontoxml":"*",
       "async":"*",
       "node-obf":"*"
    },

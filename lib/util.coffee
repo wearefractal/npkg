@@ -12,7 +12,7 @@ module.exports =
     exec cmd, (err, stdout, stderr) ->
       err ?= stderr if stderr? and !stderr.containsIgnoreCase 'Ignoring unknown extended header keyword'
       cb err
-           
+                 
   cloneDirectory: (dir, newdir, ignore, excludes, cb) ->
     if !cb
       cb = excludes

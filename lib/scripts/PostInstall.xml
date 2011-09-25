@@ -1,0 +1,15 @@
+<processing>
+  <job name="postinstall">
+    <os family="windows" />
+    <executefile name="$INSTALL_PATH/config/windows.bat">
+      <env>BASE=$INSTALL_PATH</env>
+    </executefile>
+  </job>
+  <job name="postinstall">
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/config/unix.sh">
+      <env>BASE=$INSTALL_PATH</env>
+    </executefile>
+  </job>
+  <onFail previous="true" next="false" />
+</processing>

@@ -8,11 +8,7 @@
    "main":"./lib/main.js",
 
    "dependencies":{
-      "coffee-script":"*",
-      "node-log":"*",
-      "fusker":"*",
-      "protege":"*",
-      "get":"*"
+      "node-log":"*"
    },
    "engines":{
       "node":">= 0.4.0"
