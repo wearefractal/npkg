@@ -12,9 +12,19 @@ writeRunners = (dirs, pack, opt, cb) ->
   unix = '#!/bin/sh\n'
   unix += 'cd $( dirname "$0" )\n'
   unix += './node/node ./' + main+ '\n'
-  fs.writeFile path.join(dirs.temp, 'run'), unix, (err) ->
-    throw err if err
-    cb()
+  
+  winblows = './node/node.exe ./' + main + '\r\n'
+  
+  writeUnix = (call) ->
+    fs.writeFile path.join(dirs.temp, 'run'), unix, (err) ->
+      throw err if err
+      call()
+      
+  writeWinblows = (call) ->
+    fs.writeFile path.join(dirs.temp, 'run.bat'), winblows, (err) ->
+      throw err if err
+      call()
+  async.parallel [writeUnix, writeWinblows], cb
   
 copyApp = (dirs, pack, opt, cb) ->
   log.info 'Cloning application...'
