@@ -1,0 +1,23 @@
+<shortcuts>
+  <skipIfNotSupported/>
+  <programGroup defaultName="$"
+                location="startMenu"/>
+  <shortcut
+    name=""
+    target="$INSTALL_PATH\run.bat"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH"
+    description="$DESCRIPTION"
+    iconFile="$INSTALL_PATH\app.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications="no"
+    startMenu="yes"
+    startup="no">
+
+    <createForPack name="MyApplication Binaries"/>
+    <createForPack name="MyApplication Batchfiles"/>
+  </shortcut>
+</shortcuts>

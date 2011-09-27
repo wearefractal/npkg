@@ -10,4 +10,3 @@
 
   * Installer customization through config files
   * Test on OSX and Windows
-  * Desktop Icons

@@ -27,7 +27,6 @@ module.exports =
     exe = (call) ->
       log.info 'Compiling .exe installer...'
       cmd = path.join(wrapdir, '/izpack2exe/izpack2exe.py') + ' --file=' + outjar + ' --output=' + outexe 
-      cmd += ' --with-7z=' + path.join(wrapdir, '/izpack2exe/7za') + ' --with-upx=' + path.join(wrapdir, '/izpack2exe/upx') # Options. TODO: Let user change these
       exec cmd, (error, stdout, stderr) ->
         throw error if error
         call()
@@ -39,12 +38,16 @@ module.exports =
         throw error if error
         call()
                 
-    jar -> async.parallel [exe, app], cb
+    jar -> async.parallel [app, exe], cb
         
   # This is a trainwreck of converting a JSON object to XML
   generateXML: (dirs, pack, opt, cb) ->
     log.info 'Generating installer configuration...'
-
+      
+    licensed = path.existsSync path.join dirs.app, 'LICENSE'
+    winIcon = path.existsSync path.join dirs.app, 'app.ico'
+    unixIcon = path.existsSync path.join dirs.app, 'app.png'
+    
     # Install info - Displayed during install + used in saving files
     authors = []
     authors.push pack.author
@@ -71,17 +74,21 @@ module.exports =
     # UI panels
     out += '<panels>'
     out += '<panel classname="HelloPanel"/>'
-    licensed = path.existsSync path.join dirs.app, 'LICENSE'
     if licensed then out += '<panel classname="LicencePanel"/>'
     out += '<panel classname="TargetPanel"/>'
     out += '<panel classname="InstallPanel"/>'
     out += '<panel classname="ProcessPanel"/>'
+    if winIcon and not unixIcon then out += '<panel classname="ShortcutPanel" os="windows"/>'
+    if unixIcon and not winIcon then out += '<panel classname="ShortcutPanel" os="unix"/>'
+    if unixIcon and winIcon then out += '<panel classname="ShortcutPanel"/>'
     out += '<panel classname="SimpleFinishPanel"/>'
     out += '</panels>'
 
     # Resources for the panels
     out += '<resources>'
     out += '<res id="ProcessPanel.Spec.xml" src="' + path.join(path.basename(dirs.config), 'PostInstall.xml') + '"/>'
+    if winIcon then out += '<res id="shortcutSpec.xml" src="' + path.join(path.basename(dirs.config), 'win_shortcut.xml') + '"/>'
+    if unixIcon then out += '<res id="Unix_shortcutSpec.xml" src="' + path.join(path.basename(dirs.config), 'unix_shortcut.xml') + '"/>'
     if licensed then out += '<res id="LicencePanel.licence" src="' + path.join(path.basename(dirs.app), 'LICENSE') + '"/>'
     out += '</resources>'
     
@@ -97,6 +104,6 @@ module.exports =
     # Constants
     out += '<guiprefs resizable="yes" width="600" height="400"/>'
     out += '<locale><langpack iso3="eng"/></locale>' # Shortcuts on windows
-    out += '<natives><native type="izpack" name="ShellLink.dll"/></natives>' # Shortcuts on windows
+    if winIcon then out += '<natives><native type="izpack" name="ShellLink.dll"/></natives>' # Shortcuts on windows
     out += '</installation>'
     cb out

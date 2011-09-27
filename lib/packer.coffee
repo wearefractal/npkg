@@ -16,7 +16,7 @@ writeRunners = (dirs, pack, opt, cb) ->
   winblows = './node/node.exe ./' + main
   
   writeUnix = (call) ->
-    fs.writeFile path.join(dirs.temp, 'run'), unix, (err) ->
+    fs.writeFile path.join(dirs.temp, 'run.sh'), unix, (err) ->
       throw err if err
       call()
       
@@ -84,8 +84,8 @@ saveNode = (dirs, pack, opt, cb) ->
     
 module.exports =
   save: (dirs, pack, opt, cb) ->
-    npmfn = (call) -> saveNPM dirs, pack, opt, call
-    nodefn = (call) -> saveNode dirs, pack, opt, call
+    npmfn = (call) -> call()# saveNPM dirs, pack, opt, call
+    nodefn = (call) -> call()# saveNode dirs, pack, opt, call
     copyAppfn = (call) -> copyApp dirs, pack, opt, call
     copyScriptsfn = (call) -> copyScripts dirs, pack, opt, call
     unixRun = (call) -> writeRunners dirs, pack, opt, call

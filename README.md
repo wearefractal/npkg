@@ -17,22 +17,26 @@ Simple as that. If you did everything properly you will now be greeted with an e
 
 ## Configuration
 
-npkg parses configuration out of your package.json file for the installer
+npkg parses configuration out of your package.json file for the installer.
+
 ![It looks like this](http://i.imgur.com/WepNn.png)
 
-If you have a LICENSE file in the same folder, you will also force an agreement
+If you have a LICENSE file they will have to accept it to install
 ![Like this](http://i.imgur.com/7USV8.png)
 
-After they select the installation location, (hopefully) they will be presented with this
+If you have an app.png (Unix) and app.ico (Windows) they will be presented with an option to install desktop icons.
+![Like this](URL)
+
+If they are on Unix, NodeJS is downloaded and bundled at the end of the installation
+![Like this](URL)
+
+Success!
 ![SUCCESS](http://i.imgur.com/419l7.png)
 
 ## Dependencies
 
-For developers:
-tar, Java, and Python.
-
-For consumers:
-Java. If we want to shake Java we have to write native installers for every type of OS. Send me a message if you come up with a better idea, Java FTL.
+For developers: tar, Java, Python
+For consumers: Java
 
 ## LICENSE
 

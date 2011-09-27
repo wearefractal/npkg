@@ -1,3 +1,8 @@
+0.0.5 / September 26, 2011
+==================
+  * Desktop/Application icons
+  * Uninstaller
+
 0.0.4 / September 25, 2011
 ==================
   * Overall improvements

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<shortcuts>
+  <programGroup defaultName="$APP_NAME" location="applications"/>
+    <shortcut
+     name="$APP_NAME"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="yes"
+     startup="no"
+     target="$INSTALL_PATH/run.sh"
+     commandLine=""
+     workingDirectory=""
+     description="Start $APP_NAME"
+     iconFile="$INSTALL_PATH/app/app.png"
+     iconIndex="0"
+     type="Application"
+     encoding="UTF-8"
+     terminal="true"
+     KdeSubstUID="false"
+     initialState="normal"/>
+
+   <shortcut
+     name="$APP_NAME Uninstaller"
+     programGroup="yes"
+     desktop="no"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="java"
+     commandLine="-jar '$INSTALL_PATH/Uninstaller/uninstaller.jar'"
+     initialState="noShow"
+     iconFile="trashcan_full"
+     iconIndex="0"
+     workingDirectory=""
+     type="Application"
+     encoding="UTF-8"
+     description="$APP_NAME Uninstaller"/>
+</shortcuts>
