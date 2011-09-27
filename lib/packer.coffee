@@ -46,7 +46,7 @@ saveNPM = (dirs, pack, opt, cb) ->
         new get(uri: obj.download).toDisk out, (err, result) ->
           throw err if err
           outf = path.join dirs.npm, dep
-          fs.mkdir outf, 0777, (err) ->
+          fs.mkdir outf, 0755, (err) ->
             throw err if err
             util.unpack result, outf, true, (err) ->
               if err then log.error 'Unpacking ' + dep + ' failed! Error: ' + err
@@ -66,7 +66,7 @@ saveNode = (dirs, pack, opt, cb) ->
     new get(uri: srcdl).toDisk path.join(dirs.node, 'node.tgz'), (err, result) ->
       throw err if err
       srcout = path.join dirs.node, 'src/'
-      fs.mkdir srcout, 0777, (err) ->
+      fs.mkdir srcout, 0755, (err) ->
         throw err if err
         util.unpack result, srcout, true, (err) ->
           throw err if err

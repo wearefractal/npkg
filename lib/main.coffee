@@ -33,17 +33,17 @@ module.exports =
     for dir of dirs
       if path.existsSync(dirs[dir])
         rimraf.sync dirs[dir]
-      fs.mkdirSync dirs[dir], 0777
+      fs.mkdirSync dirs[dir], 0755
     
     if path.existsSync opt.out 
       if fs.readdirSync(opt.out).length <= 3 # We create 3 files, if they have any more throw an error
         rimraf.sync opt.out 
-        fs.mkdirSync opt.out, 0777
+        fs.mkdirSync opt.out, 0755
       else
         console.error 'Detected an unclean build folder! Please specify an empty or nonexistant folder'
         return cb()
     else 
-      fs.mkdirSync opt.out, 0777
+      fs.mkdirSync opt.out, 0755
       
     packer.save dirs, pack, opt, ->
       izpack.generateXML dirs, pack, opt, (result) ->

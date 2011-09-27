@@ -20,7 +20,7 @@ module.exports =
       cmd = path.join(izdir, '/bin/compile') + ' "' + path.join(dirs.config, 'install.xml') + '" -b "' + dirs.temp + '" -o "' + outjar + '" -k standard'
       exec cmd, (error, stdout, stderr) ->
         throw error if error
-        fs.chmod outjar, 0777, (err) ->
+        fs.chmod outjar, 0755, (err) ->
           throw error if error
           call()
           

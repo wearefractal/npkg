@@ -6,5 +6,5 @@ make
 make install
 wait
 cd $BASE
-chmod 0777 run.sh
+chmod 0755 run.sh
 echo 'Installation finished!'

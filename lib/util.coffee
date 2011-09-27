@@ -67,7 +67,7 @@ module.exports =
       if exists
         run cb
       else
-        fs.mkdir newdir, 0777, (err) -> 
+        fs.mkdir newdir, 0755, (err) -> 
           throw err if err
           run cb
             
