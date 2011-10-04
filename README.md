@@ -1,37 +1,43 @@
 **npkg is a utility that generates cross-platform installation packages for NodeJS applications**
 
 ## Installation
-    
+
 To install node-package, use [npm](http://github.com/isaacs/npm):
 
     $ npm install -g npkg
 
 ## Usage
 
-    $ npkg <input folder containing your package.json and app> <output folder>
+    $ npkg <input folder containing your package.json and app> <output folder (optional)>
 
 Simple as that. If you did everything properly you will now be greeted with an epic success
-![Output](http://i.imgur.com/XfK3A.png)
 
-<output folder> is optional and defaults to <input folder>/build/
+![Output](http://i.imgur.com/HiFwh.png)
 
 ## Configuration
 
 npkg parses configuration out of your package.json file for the installer.
 
-![It looks like this](http://i.imgur.com/WepNn.png)
+![It looks like this](http://i.imgur.com/dDDkx.png)
 
-If you have a LICENSE file they will have to accept it to install
-![Like this](http://i.imgur.com/7USV8.png)
 
-If you have an app.png (Unix) and app.ico (Windows) they will be presented with an option to install desktop icons.
-![Like this](URL)
+If you have a LICENSE file they will have to accept it to proceed with the installation
+
+![Like this](http://i.imgur.com/Va7Wq.png)
+
+
+If you have an app.png (Unix) and app.ico (Windows) they will be presented with an option to place desktop icons.
+
+![Like this](http://i.imgur.com/i9pMb.png)
+
 
 If they are on Unix, NodeJS is downloaded and bundled at the end of the installation
-![Like this](URL)
+
+![Like this](http://i.imgur.com/O8pDG.png)
 
 Success!
-![SUCCESS](http://i.imgur.com/419l7.png)
+
+![SUCCESS](http://i.imgur.com/IjBUo.png)
 
 ## Dependencies
 
@@ -63,3 +69,4 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+

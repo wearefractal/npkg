@@ -1,3 +1,7 @@
+0.0.6 / October 3, 2011
+==================
+  * Massive amounts of bug fixes
+
 0.0.5 / September 26, 2011
 ==================
   * Desktop/Application icons

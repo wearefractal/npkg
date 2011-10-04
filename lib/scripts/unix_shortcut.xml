@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <shortcuts>
+  <skipIfNotSupported/>
   <programGroup defaultName="$APP_NAME" location="applications"/>
     <shortcut
      name="$APP_NAME"
      programGroup="yes"
      desktop="yes"
      applications="no"
-     startMenu="yes"
+     startMenu="no"
      startup="no"
      target="$INSTALL_PATH/run.sh"
      commandLine=""
-     workingDirectory=""
-     description="Start $APP_NAME"
+     workingDirectory="$INSTALL_PATH"
+     description="$DESCRIPTION"
      iconFile="$INSTALL_PATH/app/app.png"
      iconIndex="0"
      type="Application"
      encoding="UTF-8"
      terminal="true"
-     KdeSubstUID="false"
      initialState="normal"/>
 
    <shortcut
@@ -37,3 +37,4 @@
      encoding="UTF-8"
      description="$APP_NAME Uninstaller"/>
 </shortcuts>
+

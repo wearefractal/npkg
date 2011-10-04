@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <shortcuts>
   <skipIfNotSupported/>
-  <programGroup defaultName="$"
-                location="startMenu"/>
+  <programGroup defaultName="$APP_NAME" location="startMenu"/>
   <shortcut
-    name=""
+    name="$APP_NAME"
     target="$INSTALL_PATH\run.bat"
     commandLine=""
     workingDirectory="$INSTALL_PATH"
@@ -16,8 +16,6 @@
     applications="no"
     startMenu="yes"
     startup="no">
-
-    <createForPack name="MyApplication Binaries"/>
-    <createForPack name="MyApplication Batchfiles"/>
   </shortcut>
 </shortcuts>
+
