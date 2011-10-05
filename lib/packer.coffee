@@ -42,7 +42,7 @@ saveNPM = (dirs, pack, opt, cb) ->
 
     saveModule = (dep, call) ->
         obj = deps[dep]
-        out = path.join dirs.deps, path.basename(obj.download)
+        out = path.join dirs.deps, path.basename obj.download
         new get(uri: obj.download).toDisk out, (err, result) ->
           throw err if err
           outf = path.join dirs.npm, dep
@@ -84,8 +84,8 @@ saveNode = (dirs, pack, opt, cb) ->
 
 module.exports =
   save: (dirs, pack, opt, cb) ->
-    npmfn = (call) -> call()# saveNPM dirs, pack, opt, call
-    nodefn = (call) -> call()# saveNode dirs, pack, opt, call
+    npmfn = (call) -> saveNPM dirs, pack, opt, call
+    nodefn = (call) -> saveNode dirs, pack, opt, call
     copyAppfn = (call) -> copyApp dirs, pack, opt, call
     copyScriptsfn = (call) -> copyScripts dirs, pack, opt, call
     unixRun = (call) -> writeRunners dirs, pack, opt, call
