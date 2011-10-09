@@ -12,12 +12,12 @@ module.exports =
     exec cmd, (err, stdout, stderr) ->
       err ?= stderr if stderr? and !stderr.containsIgnoreCase 'Ignoring unknown extended header keyword'
       cb err
-                 
+
   cloneDirectory: (dir, newdir, ignore, excludes, cb) ->
     if !cb
       cb = excludes
       excludes = []
-    
+
     clone = (file, call) ->
       oldf = path.join dir, file
       newf = path.join newdir, file
@@ -31,14 +31,14 @@ module.exports =
             fs.writeFile newf, data, (err) ->
               throw err if err
               call()
-            
+
     copyAll = (call) ->
       fs.readdir dir, (err, files) ->
         excludes = excludes.unique()
         files ?= []
         files = (x for x in files when excludes.indexOf(x) is -1) # TODO: REGEX TESTING
         async.forEach files, clone, call
-              
+
     npmExclude = (call) ->
       npmignore = path.join dir, '/.npmignore'
       path.exists npmignore, (exists) ->
@@ -47,7 +47,7 @@ module.exports =
           throw err if err
           excludes.merge data.toString().split '\n'
           call()
-              
+
     gitExclude = (call) ->
       gitignore = path.join dir, '/.gitignore'
       path.exists gitignore, (exists) ->
@@ -56,18 +56,18 @@ module.exports =
           throw err if err
           excludes.merge data.toString().split '\n'
           call()
-    
+
     run = (call) ->
-      if ignore          
+      if ignore
         async.parallel [npmExclude, gitExclude], -> copyAll call
       else
         copyAll call
-                 
+
     path.exists newdir, (exists) ->
       if exists
         run cb
       else
-        fs.mkdir newdir, 0755, (err) -> 
+        fs.mkdir newdir, 0755, (err) ->
           throw err if err
           run cb
-            
+

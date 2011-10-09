@@ -40,7 +40,7 @@ module.exports =
 
     jar -> async.parallel [app, exe], cb
 
-  # This is a trainwreck of converting a JSON object to XML
+  # This is a trainwreck of converting a settings to iZXML
   generateXML: (dirs, pack, opt, cb) ->
     log.info 'Generating installer configuration...'
 
